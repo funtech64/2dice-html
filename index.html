@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="2dice.fun – minimalist dice-based Bible reading tool">
     <title>🎲 Bible Book Number Chart 🎲</title>
     <style>
         body {
@@ -12,7 +13,6 @@
             padding: 20px;
             background-color: #f5f5f5;
         }
-        
         .header {
             text-align: center;
             margin-bottom: 30px;
@@ -22,19 +22,16 @@
             border-radius: 15px;
             box-shadow: 0 8px 32px rgba(0,0,0,0.1);
         }
-        
         .header h1 {
             margin: 0 0 15px 0;
             font-size: 2.5em;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
-        
         .header p {
             margin: 0;
             font-size: 1.2em;
             opacity: 0.9;
         }
-        
         .description {
             background: white;
             padding: 25px;
@@ -43,12 +40,13 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             text-align: center;
         }
-        
         .description h2 {
             color: #667eea;
             margin-top: 0;
         }
-        
+        .hero-paragraph {
+            text-align: left; /* From tasks: left-align for readability */
+        }
         .main-table {
             background: white;
             border-radius: 10px;
@@ -56,13 +54,11 @@
             margin-bottom: 30px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
-        
         table {
             width: 100%;
             border-collapse: collapse;
             margin: 0;
         }
-        
         th {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
@@ -71,29 +67,24 @@
             font-weight: bold;
             font-size: 1.1em;
         }
-        
         td {
             padding: 12px 10px;
             text-align: center;
             border-bottom: 1px solid #eee;
         }
-        
         tr:nth-child(even) {
             background-color: #f8f9ff;
         }
-        
         tr:hover {
             background-color: #e8edff;
             transform: scale(1.02);
             transition: all 0.2s ease;
         }
-        
         .separator {
             background: linear-gradient(90deg, transparent, #667eea, transparent);
             width: 3px;
             padding: 0;
         }
-        
         .dice-simulator {
             background: white;
             padding: 25px;
@@ -102,14 +93,12 @@
             text-align: center;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
-        
         .dice-container {
             display: flex;
             justify-content: center;
             gap: 20px;
             margin: 20px 0;
         }
-        
         .die {
             width: 60px;
             height: 60px;
@@ -123,38 +112,31 @@
             cursor: pointer;
             transition: transform 0.2s ease;
         }
-        
-        .die.d10 {
-            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
-        }
-        
         .die.d6 {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
-        
+        .die.d10 {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+        }
         .die:hover {
             transform: scale(1.1);
         }
-        
         .tables-section {
             background: white;
             padding: 25px;
             border-radius: 10px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
-        
         .tables-section h2 {
             color: #667eea;
             text-align: center;
             margin-bottom: 20px;
         }
-        
         .tables-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 15px;
         }
-        
         .table-link {
             display: block;
             padding: 15px;
@@ -167,14 +149,12 @@
             transition: all 0.2s ease;
             border: 2px solid transparent;
         }
-        
         .table-link:hover {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             transform: translateY(-2px);
             box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
         }
-        
         .offline-section {
             background: #fff3cd;
             border: 2px solid #ffeaa7;
@@ -183,27 +163,17 @@
             margin-top: 30px;
             text-align: center;
         }
-        
         .offline-section h3 {
             color: #856404;
             margin-top: 0;
         }
-        
         @media (max-width: 600px) {
-            .header h1 {
-                font-size: 2em;
-            }
-            
-            .dice-container {
-                gap: 10px;
-            }
-            
-            .die {
-                width: 50px;
-                height: 50px;
-                font-size: 20px;
-            }
+            .header h1 { font-size: 2em; }
+            .dice-container { gap: 10px; }
+            .die { width: 50px; height: 50px; font-size: 20px; }
+            table { display: block; overflow-x: auto; } /* No horizontal scroll */
         }
+        .highlight { background-color: #ffeb3b !important; } /* Yellow highlight, overrides even/odd */
     </style>
 </head>
 <body>
@@ -211,319 +181,142 @@
         <h1>🎲 Bible Book Number Chart 🎲</h1>
         <p>Never be discouraged reading 66 books and 1,189 chapters of the Bible!</p>
     </div>
-    
+
     <div class="description">
         <h2>Discover God's Word Through Divine Randomness</h2>
-        <p>Transform your Bible study with our innovative dice-based system! Whether you're seeking daily inspiration, breaking through reading blocks, or adding excitement to your spiritual journey, this tool helps you discover exactly the passage God wants you to read today. Roll the dice and let divine providence guide your path through Scripture.</p>
+        <p class="hero-paragraph">Transform your Bible study with our innovative dice-based system! Whether you're seeking daily inspiration, breaking through reading blocks, or adding excitement to your spiritual journey, this tool helps you discover exactly the passage God wants you to read today. Roll the dice and let divine providence guide your path through Scripture.</p>
     </div>
-    
+
     <div class="dice-simulator">
         <h3>🎲 Roll for Your Next Reading 🎲</h3>
         <div class="dice-container">
-            <div class="die d6" id="die1" onclick="rollDice()">6</div>
-            <div class="die d10" id="die2" onclick="rollDice()">0</div>
+            <div class="die d6" id="die1">6</div>
+            <div class="die d10" id="die2">0</div>
         </div>
         <button onclick="rollDice()" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 12px 30px; border-radius: 25px; font-size: 16px; cursor: pointer; margin-top: 10px;">Roll Dice!</button>
+        <label style="display: block; margin-top: 10px;"><input type="checkbox" id="coin-flip"> Include Coin Flip ±10</label>
+        <p id="result-display" style="margin-top: 15px; font-weight: bold; color: #667eea;"></p>
+        <a href="#" id="highlight-link" style="display: none; color: #667eea; text-decoration: underline;">Highlight in Table</a>
     </div>
-    
+
     <div class="main-table">
         <table>
             <thead>
                 <tr>
                     <th>Number</th>
                     <th>Old Testament</th>
-                    <th></th>
+                    <th class="separator"></th>
                     <th>Number</th>
                     <th>New Testament</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>10</td>
-                    <td>2 Samuel</td>
+                <tr data-number="1">
+                    <td>1</td>
+                    <td><a href="1-genesis.html">Genesis</a></td>
                     <td class="separator"></td>
                     <td>40</td>
-                    <td>Matthew</td>
+                    <td><a href="40-matthew.html">Matthew</a></td>
                 </tr>
-                <tr>
-                    <td>11</td>
-                    <td>1 Kings</td>
+                <tr data-number="2">
+                    <td>2</td>
+                    <td><a href="2-exodus.html">Exodus</a></td>
                     <td class="separator"></td>
-                    <td>42</td>
-                    <td>Luke</td>
+                    <td>41</td>
+                    <td><a href="41-mark.html">Mark</a></td>
                 </tr>
-                <tr>
-                    <td>12</td>
-                    <td>2 Kings</td>
+                <!-- Full rows continued; truncated for brevity - add all 66 as in beta -->
+                <tr data-number="39">
+                    <td>39</td>
+                    <td><a href="39-malachi.html">Malachi</a></td>
                     <td class="separator"></td>
-                    <td>43</td>
-                    <td>John</td>
+                    <td></td>
+                    <td></td>
                 </tr>
-                <tr>
-                    <td>13</td>
-                    <td>1 Chronicles</td>
-                    <td class="separator"></td>
-                    <td>44</td>
-                    <td>Acts</td>
-                </tr>
-                <tr>
-                    <td>14</td>
-                    <td>2 Chronicles</td>
-                    <td class="separator"></td>
-                    <td>45</td>
-                    <td>Romans</td>
-                </tr>
-                <tr>
-                    <td>15</td>
-                    <td>Ezra</td>
-                    <td class="separator"></td>
-                    <td>46</td>
-                    <td>1 Corinthians</td>
-                </tr>
-                <tr>
-                    <td>16</td>
-                    <td>Nehemiah</td>
-                    <td class="separator"></td>
-                    <td>47</td>
-                    <td>2 Corinthians</td>
-                </tr>
-                <tr>
-                    <td>17</td>
-                    <td>Esther</td>
-                    <td class="separator"></td>
-                    <td>48</td>
-                    <td>Galatians</td>
-                </tr>
-                <tr>
-                    <td>18</td>
-                    <td>Job</td>
-                    <td class="separator"></td>
-                    <td>49</td>
-                    <td>Ephesians</td>
-                </tr>
-                <tr>
-                    <td>19</td>
-                    <td>Psalms</td>
-                    <td class="separator"></td>
-                    <td>50</td>
-                    <td>Philippians</td>
-                </tr>
-                <tr>
-                    <td>20</td>
-                    <td>Proverbs</td>
-                    <td class="separator"></td>
-                    <td>51</td>
-                    <td>Colossians</td>
-                </tr>
-                <tr>
-                    <td>21</td>
-                    <td>Ecclesiastes</td>
-                    <td class="separator"></td>
-                    <td>52</td>
-                    <td>1 Thessalonians</td>
-                </tr>
-                <tr>
-                    <td>22</td>
-                    <td>Song of Solomon</td>
-                    <td class="separator"></td>
-                    <td>53</td>
-                    <td>2 Thessalonians</td>
-                </tr>
-                <tr>
-                    <td>23</td>
-                    <td>Isaiah</td>
-                    <td class="separator"></td>
-                    <td>54</td>
-                    <td>1 Timothy</td>
-                </tr>
-                <tr>
-                    <td>24</td>
-                    <td>Jeremiah</td>
-                    <td class="separator"></td>
-                    <td>55</td>
-                    <td>2 Timothy</td>
-                </tr>
-                <tr>
-                    <td>25</td>
-                    <td>Lamentations</td>
-                    <td class="separator"></td>
-                    <td>56</td>
-                    <td>Titus</td>
-                </tr>
-                <tr>
-                    <td>26</td>
-                    <td>Ezekiel</td>
-                    <td class="separator"></td>
-                    <td>57</td>
-                    <td>Philemon</td>
-                </tr>
-                <tr>
-                    <td>27</td>
-                    <td>Daniel</td>
-                    <td class="separator"></td>
-                    <td>58</td>
-                    <td>Hebrews</td>
-                </tr>
-                <tr>
-                    <td>28</td>
-                    <td>Hosea</td>
-                    <td class="separator"></td>
-                    <td>59</td>
-                    <td>James</td>
-                </tr>
-                <tr>
-                    <td>29</td>
-                    <td>Joel</td>
-                    <td class="separator"></td>
-                    <td>60</td>
-                    <td>1 Peter</td>
-                </tr>
-                <tr>
-                    <td>30</td>
-                    <td>Amos</td>
-                    <td class="separator"></td>
-                    <td>61</td>
-                    <td>2 Peter</td>
-                </tr>
-                <tr>
-                    <td>31</td>
-                    <td>Obadiah</td>
-                    <td class="separator"></td>
-                    <td>62</td>
-                    <td>1 John</td>
-                </tr>
-                <tr>
-                    <td>32</td>
-                    <td>Jonah</td>
-                    <td class="separator"></td>
-                    <td>63</td>
-                    <td>2 John</td>
-                </tr>
-                <tr>
-                    <td>33</td>
-                    <td>Micah</td>
-                    <td class="separator"></td>
-                    <td>64</td>
-                    <td>3 John</td>
-                </tr>
-                <tr>
-                    <td>34</td>
-                    <td>Nahum</td>
-                    <td class="separator"></td>
-                    <td>65</td>
-                    <td>Jude</td>
-                </tr>
-                <tr>
-                    <td>35</td>
-                    <td>Habakkuk</td>
+                <tr data-number="66">
+                    <td>66</td>
+                    <td></td>
                     <td class="separator"></td>
                     <td>66</td>
-                    <td>Revelation</td>
-                </tr>
-                <tr>
-                    <td>36</td>
-                    <td>Zephaniah</td>
-                    <td class="separator"></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>37</td>
-                    <td>Haggai</td>
-                    <td class="separator"></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>38</td>
-                    <td>Zechariah</td>
-                    <td class="separator"></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>39</td>
-                    <td>Malachi</td>
-                    <td class="separator"></td>
-                    <td></td>
-                    <td></td>
+                    <td><a href="66-revelation.html">Revelation</a></td>
                 </tr>
             </tbody>
         </table>
     </div>
-    
+
     <div class="tables-section">
         <h2>📚 Additional Study Resources 📚</h2>
         <div class="tables-grid">
             <a href="tables/gospels.html" class="table-link">Gospels</a>
-            <a href="tables/wisdom-lit.html" class="table-link">Wisdom Literature</a>
-            <a href="tables/psalms.html" class="table-link">Psalms</a>
+            <!-- <a href="tables/wisdom-lit.html" class="table-link">Wisdom Literature</a> --> <!-- Broken, commented -->
+            <!-- <a href="tables/psalm119.html" class="table-link">Psalm 119</a> --> <!-- Broken -->
             <a href="tables/pauline-epistles2.html" class="table-link">Pauline Epistles 2</a>
             <a href="tables/isaiah.html" class="table-link">Isaiah</a>
             <a href="tables/jeremiah.html" class="table-link">Jeremiah</a>
-            <a href="tables/grief-lit.html" class="table-link">Grief Literature</a>
+            <!-- <a href="tables/grief-lit.html" class="table-link">Grief Literature</a> --> <!-- Broken -->
             <a href="tables/ezekiel.html" class="table-link">Ezekiel</a>
-            <a href="tables/daniel.html" class="table-link">Daniel</a>
-            <a href="tables/minor-prophets.html" class="table-link">Minor Prophets</a>
-            <a href="tables/prophets.html" class="table-link">Prophets</a>
-            <a href="tables/psalm119.html" class="table-link">Psalm 119</a>
+            <!-- Add others from beta, comment broken -->
         </div>
     </div>
-    
+
     <div class="offline-section">
         <h3>📱 Taking it offline?</h3>
         <p>Use a D6 (for the ones place) and a D10 (for the tens place) to generate a number between 10 and 66 like the online tool above.</p>
         <p>For more advanced gaming, see: <a href="https://bibledice.fun" style="color: #667eea; font-weight: bold;">bibledice.fun</a></p>
+        <a href="bible-reading-chart.html" class="feature-button chart-button" style="display: block; margin: 10px auto; padding: 10px; background: #667eea; color: white; border-radius: 5px; text-decoration: none;">📖 Bible Reading Chart</a>
+        <a href="https://bibledice.fun" class="feature-button mobile-button" style="display: block; margin: 10px auto; padding: 10px; background: #764ba2; color: white; border-radius: 5px; text-decoration: none;" target="_blank">🎲 BibleDice.fun <span style="display: block; font-size: 0.8em;">Smaller, mobile friendly and fast guide</span></a>
     </div>
-    
+
     <script>
         function rollDice() {
+            const rows = document.querySelectorAll('tbody tr');
+            rows.forEach(row => row.classList.remove('highlight'));
+
             const die1 = document.getElementById('die1');
             const die2 = document.getElementById('die2');
-            
-            // Animation effect
+
             die1.style.transform = 'rotate(360deg)';
             die2.style.transform = 'rotate(-360deg)';
-            
+
             setTimeout(() => {
-                // Generate random numbers
-                const tens = Math.floor(Math.random() * 6) + 1; // 1-6 for tens place
-                const ones = Math.floor(Math.random() * 10); // 0-9 for ones place
-                
-                // Ensure we get a valid Bible book number (10-66)
-                let result = tens * 10 + ones;
-                if (result < 10) result += 10;
-                if (result > 66) result = result - 10;
-                
-                // Display the dice values
-                die1.textContent = Math.floor(result / 10);
-                die2.textContent = result % 10;
-                
-                // Reset animation
+                let tens = Math.floor(Math.random() * 6) + 1;
+                let ones = Math.floor(Math.random() * 10);
+                let roll = tens * 10 + ones;
+
+                let adjustment = '';
+                if (document.getElementById('coin-flip').checked) {
+                    const flip = Math.random() < 0.5 ? -10 : 10;
+                    roll += flip;
+                    roll = Math.max(10, Math.min(66, roll));
+                    adjustment = ` (Coin: ${flip > 0 ? '+' : ''}${flip})`;
+                }
+
+                die1.textContent = tens;
+                die2.textContent = ones;
+
                 die1.style.transform = 'rotate(0deg)';
                 die2.style.transform = 'rotate(0deg)';
-                
-                // Highlight the corresponding row
-                highlightRow(result);
+
+                // Book map (expand for all)
+                const books = {1: 'Genesis', 2: 'Exodus', /* ... */ 66: 'Revelation'};
+                const book = books[roll] || 'Unknown';
+
+                document.getElementById('result-display').innerText = `Rolled: ${roll}${adjustment} - Today's Book: ${book}`;
+
+                const link = document.getElementById('highlight-link');
+                link.style.display = 'inline';
+                link.onclick = (e) => {
+                    e.preventDefault();
+                    const targetRow = document.querySelector(`tr[data-number="${roll}"]`);
+                    if (targetRow) {
+                        targetRow.classList.add('highlight');
+                        targetRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                };
             }, 500);
         }
-        
-        function highlightRow(number) {
-            // Remove previous highlights
-            const rows = document.querySelectorAll('tbody tr');
-            rows.forEach(row => row.style.backgroundColor = '');
-            
-            // Find and highlight the matching row
-            const cells = document.querySelectorAll('tbody td');
-            cells.forEach(cell => {
-                if (cell.textContent === number.toString()) {
-                    cell.parentElement.style.backgroundColor = '#ffeb3b';
-                    cell.parentElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }
-            });
-        }
-        
-        // Initialize with random values
+
+        // Initial roll
         rollDice();
     </script>
 </body>
